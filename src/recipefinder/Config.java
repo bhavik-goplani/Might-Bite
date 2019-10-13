@@ -1,6 +1,7 @@
 /*
- * Creates the Configuration file for the Application
+ * Creates the Configuration file for the Application.
  */
+//This is a test edit for the application things
 package recipefinder;
 
 import java.io.FileInputStream;
