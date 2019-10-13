@@ -53,11 +53,15 @@ public class MainUI extends javax.swing.JFrame {
         NoExitButton = new javax.swing.JLabel();
         jScrollPane7 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        WarningDialog = new javax.swing.JDialog();
+        jPanel13 = new javax.swing.JPanel();
+        WarningLabel = new java.awt.Label();
+        label2 = new java.awt.Label();
         BlankPanel = new javax.swing.JPanel();
         DisplayingRecipes = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        AvailableRecipesList = new javax.swing.JList<>();
+        AvailableRecipesList = new javax.swing.JList<String>();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
@@ -68,9 +72,9 @@ public class MainUI extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        CommonIngredientsList = new javax.swing.JList<>();
+        CommonIngredientsList = new javax.swing.JList<String>();
         jScrollPane5 = new javax.swing.JScrollPane();
-        UncommonIngredientsList = new javax.swing.JList<>();
+        UncommonIngredientsList = new javax.swing.JList<String>();
         OpenRecipeButton = new javax.swing.JLabel();
         EnteringIngredients = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -82,14 +86,15 @@ public class MainUI extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        IngredientsList = new javax.swing.JList<>();
+        IngredientsList = new javax.swing.JList<String>();
         jLabel1 = new javax.swing.JLabel();
         SearchIngredientsBox = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        UserIngredientsList = new javax.swing.JList<>();
+        UserIngredientsList = new javax.swing.JList<String>();
         jLabel5 = new javax.swing.JLabel();
         filler7 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 30), new java.awt.Dimension(0, 30), new java.awt.Dimension(32767, 30));
+        jLabel2 = new javax.swing.JLabel();
         UserPreferences = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
@@ -224,6 +229,59 @@ public class MainUI extends javax.swing.JFrame {
         jTextArea1.setRows(5);
         jScrollPane7.setViewportView(jTextArea1);
 
+        WarningDialog.setBounds(new java.awt.Rectangle(500, 400, 600, 200));
+
+        jPanel13.setBackground(Config.getColor());
+
+        WarningLabel.setAlignment(java.awt.Label.CENTER);
+        WarningLabel.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
+        WarningLabel.setForeground(new java.awt.Color(255, 255, 255));
+        WarningLabel.setText("Please enter at least 5 Ingredients");
+
+        label2.setAlignment(java.awt.Label.CENTER);
+        label2.setBackground(new java.awt.Color(0, 0, 0));
+        label2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        label2.setFont(new java.awt.Font("Trebuchet MS", 0, 20)); // NOI18N
+        label2.setForeground(new java.awt.Color(255, 255, 255));
+        label2.setText("OKAY");
+        label2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                label2MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
+        jPanel13.setLayout(jPanel13Layout);
+        jPanel13Layout.setHorizontalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(label2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(WarningLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel13Layout.setVerticalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(WarningLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout WarningDialogLayout = new javax.swing.GroupLayout(WarningDialog.getContentPane());
+        WarningDialog.getContentPane().setLayout(WarningDialogLayout);
+        WarningDialogLayout.setHorizontalGroup(
+            WarningDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        WarningDialogLayout.setVerticalGroup(
+            WarningDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Might Bite");
         setMinimumSize(new java.awt.Dimension(800, 500));
@@ -258,10 +316,10 @@ public class MainUI extends javax.swing.JFrame {
         AvailableRecipesList.setBackground(Config.getColor());
         AvailableRecipesList.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
         AvailableRecipesList.setForeground(new java.awt.Color(255, 255, 255));
-        AvailableRecipesList.setModel(new javax.swing.AbstractListModel<String>() {
+        AvailableRecipesList.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "....Item 1", "Item 4", "Item 5", "asd", "sdad", "d", "r", "v", " ", "y", "u", "4", "e6k", "79p", ".", "ikr7", "j46", "j4e5hy53", "t4gw4q", "rq3f", "e", "qgt", "hy", "ne", "m", "ik7u6jhy6", "n", "m", "6et" };
             public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+            public Object getElementAt(int i) { return strings[i]; }
         });
         AvailableRecipesList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         AvailableRecipesList.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -298,7 +356,7 @@ public class MainUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 444, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 464, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -410,9 +468,9 @@ public class MainUI extends javax.swing.JFrame {
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(RecipeNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
+                                .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE))
+                                .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE))
                             .addGroup(jPanel7Layout.createSequentialGroup()
                                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -530,10 +588,10 @@ public class MainUI extends javax.swing.JFrame {
         IngredientsList.setBackground(Config.getColor());
         IngredientsList.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
         IngredientsList.setForeground(new java.awt.Color(255, 255, 255));
-        IngredientsList.setModel(new javax.swing.AbstractListModel<String>() {
+        IngredientsList.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+            public Object getElementAt(int i) { return strings[i]; }
         });
         IngredientsList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         IngredientsList.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -668,6 +726,11 @@ public class MainUI extends javax.swing.JFrame {
                 .addGap(5, 5, 5))
         );
 
+        jLabel2.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("CLICK INGREDIENT TO ADD OR REMOVE IT ");
+
         javax.swing.GroupLayout EnteringIngredientsLayout = new javax.swing.GroupLayout(EnteringIngredients);
         EnteringIngredients.setLayout(EnteringIngredientsLayout);
         EnteringIngredientsLayout.setHorizontalGroup(
@@ -676,24 +739,28 @@ public class MainUI extends javax.swing.JFrame {
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(EnteringIngredientsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(filler9, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
+                .addComponent(filler9, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(EnteringIngredientsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(filler10, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
+                .addComponent(filler10, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
                 .addContainerGap())
         );
         EnteringIngredientsLayout.setVerticalGroup(
             EnteringIngredientsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(EnteringIngredientsLayout.createSequentialGroup()
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
+                .addGap(0, 0, 0)
+                .addComponent(jLabel2)
+                .addGap(5, 5, 5)
                 .addGroup(EnteringIngredientsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(EnteringIngredientsLayout.createSequentialGroup()
                         .addGroup(EnteringIngredientsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(filler9, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(filler10, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 7, Short.MAX_VALUE))
+                        .addGap(0, 122, Short.MAX_VALUE))
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -787,7 +854,7 @@ public class MainUI extends javax.swing.JFrame {
                 .addComponent(AyurvedicCheckBox, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(VegetarianCheckBox, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(292, Short.MAX_VALUE))
+                .addContainerGap(323, Short.MAX_VALUE))
         );
 
         jScrollPane8.setViewportView(jPanel15);
@@ -973,7 +1040,7 @@ public class MainUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jColorChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 421, Short.MAX_VALUE)
+                .addComponent(jColorChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(SettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(SetColourButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1040,7 +1107,7 @@ public class MainUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 487, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(BackToHome, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -1098,6 +1165,7 @@ public class MainUI extends javax.swing.JFrame {
         AboutButton.setText("ABOUT");
         AboutButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         AboutButton.setOpaque(true);
+        AboutButton.setVisible(false);
         AboutButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 AboutButtonMouseClicked(evt);
@@ -1147,7 +1215,7 @@ public class MainUI extends javax.swing.JFrame {
                 .addGap(3, 3, 3)
                 .addComponent(AboutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(LogoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                .addComponent(LogoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 341, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(filler3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1190,6 +1258,7 @@ public class MainUI extends javax.swing.JFrame {
         Userpreference=(VegetarianCheckBox.isSelected())? "Vegetarian" : Userpreference;
         Userpreference=(NonVegetarianCheckBox.isSelected())? "Non-Vegetarian" :Userpreference;
         Userpreference=(AyurvedicCheckBox.isSelected())? "Ayurvedic" :Userpreference;
+        Userpreference=(NoneCheckBox.isSelected())? "None" :Userpreference;
         System.out.println(Userpreference);
         DatabaseConnect.IngExtract();
         
@@ -1250,7 +1319,12 @@ public class MainUI extends javax.swing.JFrame {
     private void ContinueButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ContinueButton1MouseClicked
         // Wants to see AvailableRecipes
         if(UserIngredientsList.getModel().getSize()<5)//If 5 Ingredients aren't entered.
+        {
+            WarningLabel.setText("PLEASE SELECT AT LEAST 5 INGREDIENTS!");
+            WarningDialog.setVisible(true);
+            
             return;
+        }
         DisplayingRecipes.setVisible(true);
         EnteringIngredients.setVisible(false);
         jPanel7.setVisible(false);
@@ -1261,49 +1335,6 @@ public class MainUI extends javax.swing.JFrame {
         setAvailableRecipesList(DatabaseConnect.AvailableRecipes);//Sets the Available Recipes in the List
         //sortListModel((DefaultListModel)AvailableRecipesListModel);//Sorts the List
     }//GEN-LAST:event_ContinueButton1MouseClicked
-
-    private void AvailableRecipesListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AvailableRecipesListMouseClicked
-        // When one of the AvailableRecipes are clicked
-        if(AvailableRecipesList.isSelectionEmpty())
-           return;
-        jPanel7.setVisible(true);
-        String name = AvailableRecipesList.getSelectedValue();
-        RecipeNameLabel.setText(name.substring(name.indexOf('.')+1)); //Sets the title
-        int index=AvailableRecipesList.getSelectedIndex();
-        System.out.println("NAME: "+name);
-        System.out.println("Name 2 "+ DatabaseConnect.AvailableRecipes[index]);        
-        System.out.println("Link "+ DatabaseConnect.RecipeLinks[index]);
-        System.out.println("Common "+DatabaseConnect.CommonIngredients[index]);
-        
-        //Sets Common and Uncommon Ingredients
-
-        setCommonIngredients(DatabaseConnect.CommonIngredients[index]);
-        setUncommonIngredients(DatabaseConnect.UncommonIngredients[index]);
-    }//GEN-LAST:event_AvailableRecipesListMouseClicked
-
-    private void DoneButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DoneButtonMouseClicked
-        // Opens the ExitConfirmation Popup
-        ExitConfirmationDialog.setVisible(true);
-    }//GEN-LAST:event_DoneButtonMouseClicked
-
-    private void BackButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BackButton2MouseClicked
-        EnteringIngredients.setVisible(true);
-        DisplayingRecipes.setVisible(false);
-    }//GEN-LAST:event_BackButton2MouseClicked
-
-    private void OpenRecipeButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OpenRecipeButtonMouseClicked
-        // Opens the recipe link in a browser.
-
-        try{
-
-            URI uri= new URI(recipefinder.DatabaseConnect.RecipeLinks[AvailableRecipesList.getSelectedIndex()]);
-                System.out.println(recipefinder.DatabaseConnect.RecipeLinks[AvailableRecipesList.getSelectedIndex()]);
-            java.awt.Desktop.getDesktop().browse(uri); //Opens
-            //System.out.println("Web page opened in browser");
-        }catch(IOException | URISyntaxException e){
-            //StatusText2.setText("Error Opening URL");
-        }
-    }//GEN-LAST:event_OpenRecipeButtonMouseClicked
 
     private void NoExitButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NoExitButtonMouseClicked
         ExitConfirmationDialog.setVisible(false);
@@ -1425,6 +1456,54 @@ public class MainUI extends javax.swing.JFrame {
         PreferencesButtonGroup.add(NoneCheckBox);
         NoneCheckBox.setSelected(true);
     }//GEN-LAST:event_StartButtonMouseClicked
+
+    private void label2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_label2MouseClicked
+        // TODO add your handling code here:
+        WarningDialog.setVisible(false);
+    }//GEN-LAST:event_label2MouseClicked
+
+    private void OpenRecipeButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OpenRecipeButtonMouseClicked
+        // Opens the recipe link in a browser.
+
+        try{
+
+            URI uri= new URI(recipefinder.DatabaseConnect.RecipeLinks[AvailableRecipesList.getSelectedIndex()]);
+            System.out.println(recipefinder.DatabaseConnect.RecipeLinks[AvailableRecipesList.getSelectedIndex()]);
+            java.awt.Desktop.getDesktop().browse(uri); //Opens
+            //System.out.println("Web page opened in browser");
+        }catch(IOException | URISyntaxException e){
+            //StatusText2.setText("Error Opening URL");
+        }
+    }//GEN-LAST:event_OpenRecipeButtonMouseClicked
+
+    private void BackButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BackButton2MouseClicked
+        EnteringIngredients.setVisible(true);
+        DisplayingRecipes.setVisible(false);
+    }//GEN-LAST:event_BackButton2MouseClicked
+
+    private void DoneButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DoneButtonMouseClicked
+        // Opens the ExitConfirmation Popup
+        ExitConfirmationDialog.setVisible(true);
+    }//GEN-LAST:event_DoneButtonMouseClicked
+
+    private void AvailableRecipesListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AvailableRecipesListMouseClicked
+        // When one of the AvailableRecipes are clicked
+        if(AvailableRecipesList.isSelectionEmpty())
+        return;
+        jPanel7.setVisible(true);
+        String name = AvailableRecipesList.getSelectedValue();
+        RecipeNameLabel.setText(name.substring(name.indexOf('.')+1)); //Sets the title
+        int index=AvailableRecipesList.getSelectedIndex();
+        System.out.println("NAME: "+name);
+        System.out.println("Name 2 "+ DatabaseConnect.AvailableRecipes[index]);
+        System.out.println("Link "+ DatabaseConnect.RecipeLinks[index]);
+        System.out.println("Common "+DatabaseConnect.CommonIngredients[index]);
+
+        //Sets Common and Uncommon Ingredients
+
+        setCommonIngredients(DatabaseConnect.CommonIngredients[index]);
+        setUncommonIngredients(DatabaseConnect.UncommonIngredients[index]);
+    }//GEN-LAST:event_AvailableRecipesListMouseClicked
 
     private static void setIngredientsList(String [] Ingredient,DefaultListModel TempListModel) {
         TempListModel.clear();
@@ -1640,6 +1719,8 @@ public class MainUI extends javax.swing.JFrame {
     public static javax.swing.JList<String> UserIngredientsList;
     public javax.swing.JPanel UserPreferences;
     public javax.swing.JCheckBox VegetarianCheckBox;
+    public javax.swing.JDialog WarningDialog;
+    public java.awt.Label WarningLabel;
     public javax.swing.JPanel WelcomeScreen;
     public javax.swing.JLabel YesExitButton;
     public javax.swing.Box.Filler filler1;
@@ -1656,6 +1737,7 @@ public class MainUI extends javax.swing.JFrame {
     public javax.swing.JLabel jLabel13;
     public javax.swing.JLabel jLabel14;
     public javax.swing.JLabel jLabel15;
+    public javax.swing.JLabel jLabel2;
     public javax.swing.JLabel jLabel3;
     public javax.swing.JLabel jLabel4;
     public javax.swing.JLabel jLabel5;
@@ -1667,6 +1749,7 @@ public class MainUI extends javax.swing.JFrame {
     public javax.swing.JPanel jPanel10;
     public javax.swing.JPanel jPanel11;
     public javax.swing.JPanel jPanel12;
+    public javax.swing.JPanel jPanel13;
     public javax.swing.JPanel jPanel14;
     public javax.swing.JPanel jPanel15;
     public javax.swing.JPanel jPanel2;
@@ -1686,6 +1769,7 @@ public class MainUI extends javax.swing.JFrame {
     public javax.swing.JScrollPane jScrollPane7;
     public javax.swing.JScrollPane jScrollPane8;
     public javax.swing.JTextArea jTextArea1;
+    public java.awt.Label label2;
     // End of variables declaration//GEN-END:variables
 
 }
